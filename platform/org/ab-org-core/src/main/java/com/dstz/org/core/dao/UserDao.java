@@ -33,4 +33,6 @@ public interface UserDao extends BaseDao<String, User> {
 	List<User> getUserListByPost(@Param("roleId") String roleId, @Param("groupId") String groupId);
 
     int updateRebateMoney(@Param("jmsCode") String jmsCode, @Param("actualRebateAmount") String actualRebateAmount, @Param("brandCode") String brandCode);
+
+    String getSqCurrentYearRebate(String sqCode);
 }

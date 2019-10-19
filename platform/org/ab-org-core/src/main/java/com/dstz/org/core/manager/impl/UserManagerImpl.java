@@ -107,4 +107,9 @@ public class UserManagerImpl extends BaseManager<String, User> implements UserMa
 		return userDao.updateRebateMoney(jmsCode,actualRebateAmount,brandCode);
 	}
 
+	@Override
+	public String getSqCurrentYearRebate(String sqCode) {
+		return userDao.getSqCurrentYearRebate(sqCode);
+	}
+
 }

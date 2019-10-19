@@ -110,5 +110,19 @@
 		WHERE
 		distrcode=#{jmsCode} and brandCode =#{brandCode}
 	</update>
+
+	<select id="getSqCurrentYearRebate" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT
+			sum( b.actualRebateAmount )
+		FROM
+			bpm_instance ins
+			LEFT JOIN bpm_bus_link link ON link.inst_id_ = ins.id_
+			LEFT JOIN yywpsqzb a ON a.id = link.biz_id_
+			LEFT JOIN yy_goods_apply_affiliate b ON b.yywpzbid = a.id
+		WHERE
+			ins.def_id_ = "411834546402623489"
+			AND ins.status_ = "end"
+			AND  b.sqCode = #{sqCode}
+	</select>
     
 </mapper>

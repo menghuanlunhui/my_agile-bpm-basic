@@ -82,5 +82,10 @@ public class ABUserService implements UserService {
 		return userManager.updateRebateMoney(jmsCode,actualRebateAmount,brandCode);
 	}
 
+	@Override
+	public String getSqCurrentYearRebate(String sqCode) {
+		return userManager.getSqCurrentYearRebate(sqCode);
+	}
+
 
 }

@@ -136,5 +136,48 @@ public class OrgScript implements IScript {
 		}
 	}
 
+	/**
+	 * 校验运营发起是否是同一省区同一品牌，若是，汇总省区本年累计返利金额
+	 * @param businessDataList
+	 */
+	@CatchErr("校验运营发起是否是同一省区同一品牌")
+	@RequestMapping("judgeSqCodeAndBrand")
+	public String judgeSqCodeAndBrand(List<BusinessData> businessDataList){
+		JSONObject jsonObject = new JSONObject();
+		String brandCode="";
+		String sqCode="";
+		String sqbnljflje="0";
+		if(businessDataList.size()>0){
+			for (int i = 0; i < businessDataList.size(); i++) {
+				Map<String, Object> businessData =businessDataList.get(i).getData();
+				//校验运营发起是否是同一品牌
+				String currentBrandCode=businessData.get("brandCode").toString();
+				if("".equals(brandCode)){
+					brandCode=currentBrandCode;
+				}else{
+					if(!brandCode.equals(currentBrandCode)){//选择的品牌不一致
+						/*jsonObject.put("msg","选择的品牌不一致");
+						jsonObject.put("state",false);*/
+						return sqbnljflje;
+					}
+				}
+				//校验运营发起是否是同一省区
+				String currentSqCode=businessData.get("sqCode").toString();
+				if("".equals(sqCode)){
+					sqCode=currentSqCode;
+				}else{
+					if(!sqCode.equals(currentSqCode)){//选择的省区不一致
+						/*jsonObject.put("msg","选择的省区不一致");
+						jsonObject.put("state",false);*/
+						return sqbnljflje;
+					}
+				}
+			}
+			//汇总省区返利金额
+			sqbnljflje=userService.getSqCurrentYearRebate(sqCode);
+		}
+		return sqbnljflje;
+	}
+
 
 }

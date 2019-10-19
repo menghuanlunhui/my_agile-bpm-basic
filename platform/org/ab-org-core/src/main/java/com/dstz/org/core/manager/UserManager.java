@@ -37,4 +37,6 @@ public interface UserManager extends Manager<String, User> {
 
     int updateRebateMoney(String jmsCode, String actualRebateAmount, String brandCode);
 
+    String getSqCurrentYearRebate(String sqCode);
+
 }

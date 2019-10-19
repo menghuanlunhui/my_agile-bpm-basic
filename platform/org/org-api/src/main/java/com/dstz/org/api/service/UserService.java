@@ -48,5 +48,7 @@ public interface UserService {
 
     int updateRebateMoney(String jmsCode, String actualRebateAmount, String brandCode);
 
+    String getSqCurrentYearRebate(String sqCode);
+
 
 }
