@@ -1,11 +1,9 @@
 package com.dstz.org.core.manager;
 
-import java.util.List;
-
-import com.dstz.base.api.response.impl.ResultMsg;
 import com.dstz.base.manager.Manager;
-import com.dstz.org.api.model.IGroup;
 import com.dstz.org.core.model.OrgRelation;
+
+import java.util.List;
 
 /**
  * 用户组织关系 Manager处理接口
@@ -13,22 +11,31 @@ import com.dstz.org.core.model.OrgRelation;
  * @email for_office@qq.com
  * @time 2018-12-16 01:07:59
  */
-public interface OrgRelationManager extends Manager<String, OrgRelation>{
-	
+public interface OrgRelationManager extends Manager<String, OrgRelation> {
+
+
+	/**
+	 * 根据用户id和组织id查询用户的组织信息
+	 * @param userId
+	 * @param groupId
+	 * @return
+	 */
+	List<OrgRelation> getPostByUserIdAndGroupId(String userId, String groupId);
+
 	/**
 	 * 获取用户的岗位
 	 * @param userId
 	 * @return
 	 */
 	List<OrgRelation> getPostByUserId(String userId);
-	
+
 	/**
 	 * 获取所有用户的关系
 	 * @param userId
 	 * @param relationType
 	 * @return
 	 */
-	List<OrgRelation>  getUserRelation(String userId,String relationType);
+	List<OrgRelation>  getUserRelation(String userId, String relationType);
 
 	/**
 	 * 通过用户删除所有关联的关系

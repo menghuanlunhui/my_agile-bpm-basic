@@ -1,12 +1,6 @@
 package com.dstz.org.core.manager.impl;
 
-import java.util.List;
-
-import javax.annotation.Resource;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import cn.hutool.core.collection.CollectionUtil;
 import com.dstz.base.core.id.IdUtil;
 import com.dstz.base.core.util.StringUtil;
 import com.dstz.base.manager.impl.BaseManager;
@@ -17,8 +11,11 @@ import com.dstz.org.core.manager.OrgRelationManager;
 import com.dstz.org.core.model.Group;
 import com.dstz.org.core.model.OrgRelation;
 import com.dstz.org.core.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import cn.hutool.core.collection.CollectionUtil;
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <pre>
@@ -35,7 +32,8 @@ public class GroupManagerImpl extends BaseManager<String, Group> implements Grou
     OrgRelationManager orgRelationMananger;
 
 
-    public Group getByCode(String code) {
+    @Override
+	public Group getByCode(String code) {
         return groupDao.getByCode(code);
     }
     
@@ -65,7 +63,11 @@ public class GroupManagerImpl extends BaseManager<String, Group> implements Grou
     }
     @Override
     public void create(Group entity) {
-    	entity.setId(IdUtil.getSuid());
+    	if(entity.getId()!=null && !"".equals(entity.getId())){
+
+		}else{
+			entity.setId(IdUtil.getSuid());
+		}
     	entity.setPath(entity.getId());
     	if(StringUtil.isNotZeroEmpty(entity.getParentId())) {
     		Group parent = groupDao.get(entity.getParentId());
@@ -101,7 +103,8 @@ public class GroupManagerImpl extends BaseManager<String, Group> implements Grou
     	super.update(entity);
     }
 
-    public List<Group> getByUserId(String userId) {
+    @Override
+	public List<Group> getByUserId(String userId) {
         return groupDao.getByUserId(userId);
     }
 

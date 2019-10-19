@@ -85,7 +85,17 @@
 		WHERE
 		group_id_=#{groupId} and type_ = 'groupRole'
 	</delete>
-	
+
+
+	<select id="getPostByUserIdAndGroupId"   parameterType="java.util.Map" resultMap="OrgRelation">
+		SELECT
+			relation.id_
+		FROM
+			org_relation relation
+		WHERE
+			relation.group_id_ = #{groupId}  and user_id_=#{userId}
+	</select>
+
 	<select id="getUserRelation"   parameterType="java.util.Map" resultMap="OrgRelation">
 		SELECT relation.*,tgroup.name_ groupName,tuser.fullname_ userName,tuser.account_ userAccount,role.name_ roleName 
 		FROM org_relation relation 
@@ -101,8 +111,7 @@
 		FROM org_relation relation 
 		left join org_group tgroup on relation.group_id_ = tgroup.id_
 		left join org_role role on relation.role_id_ = role.id_
-		WHERE relation.group_id_ = #{groupId}  and relation.status_ = 1
-		and  relation.type_ = 'groupRole'
+		WHERE relation.group_id_ = #{groupId}  and relation.user_id_ = #{userId}
 	</select>
 	
 	<select id="getCountByRelation" parameterType="java.util.Map" resultType="java.lang.Integer">

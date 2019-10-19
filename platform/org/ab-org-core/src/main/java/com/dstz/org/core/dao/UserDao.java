@@ -1,12 +1,11 @@
 package com.dstz.org.core.dao;
 
-import java.util.List;
-
+import com.dstz.base.dao.BaseDao;
+import com.dstz.org.core.model.User;
 import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.annotation.MapperScan;
 
-import com.dstz.base.dao.BaseDao;
-import com.dstz.org.core.model.User;
+import java.util.List;
 
 /**
  * <pre>
@@ -15,10 +14,10 @@ import com.dstz.org.core.model.User;
  */
 @MapperScan
 public interface UserDao extends BaseDao<String, User> {
+
     /**
      * 根据Account取定义对象。
-     *
-     * @param code
+     * @param account
      * @return
      */
     User getByAccount(String account);
@@ -29,8 +28,9 @@ public interface UserDao extends BaseDao<String, User> {
     Integer isUserExist(User user);
 
 
-	List<User> getUserListByRelation(@Param("relationId")String relId, @Param("relationType")String type);
-	
-	List<User> getUserListByPost(@Param("roleId")String roleId, @Param("groupId")String groupId);
-	
+	List<User> getUserListByRelation(@Param("relationId") String relId, @Param("relationType") String type);
+
+	List<User> getUserListByPost(@Param("roleId") String roleId, @Param("groupId") String groupId);
+
+    int updateRebateMoney(@Param("jmsCode") String jmsCode, @Param("actualRebateAmount") String actualRebateAmount, @Param("brandCode") String brandCode);
 }

@@ -102,5 +102,13 @@
             and id_!=#{id}
         </if>
     </select>
+
+	<update id="updateRebateMoney" parameterType="java.lang.String">
+		UPDATE zb_sys_distr SET
+		curYearRebateMoney=curYearRebateMoney+#{actualRebateAmount},
+		totalRebateMoney=totalRebateMoney+#{actualRebateAmount}
+		WHERE
+		distrcode=#{jmsCode} and brandCode =#{brandCode}
+	</update>
     
 </mapper>

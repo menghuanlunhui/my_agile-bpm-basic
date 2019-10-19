@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dstz.org.core.dao.SysDistrDao">
+
+	<select id="getSysDistrByCodeAndId"  parameterType="java.lang.String" resultType="com.dstz.org.core.model.SysDistr">
+	  SELECT
+		*
+		FROM
+			zb_sys_distr
+		WHERE
+			custAccountId = #{custAccountId} and brandCode = #{brandCode}
+	</select>
+
+
+	<insert id="createSysDistr" parameterType="com.dstz.org.core.model.SysDistr">
+		INSERT INTO zb_sys_distr
+		(distrcode,distrname,administrativeArea,province,city,accountShortName,registrationAddress,legalPerson,custAccountId,brandCode,source,
+		distrstatus,brandName,provinceName,cityName,centerCode,centerName,sqCode,sqName,pqCode,pqName)
+		VALUES
+		(#{distrcode},#{distrname},#{administrativeArea},#{province},#{city},#{accountShortName},#{registrationAddress},#{legalPerson},#{custAccountId},#{brandCode},#{source},
+		#{distrstatus},#{brandName},#{provinceName},#{cityName},#{centerCode},#{centerName},#{sqCode},#{sqName},#{pqCode},#{pqName})
+
+	</insert>
+
+	<update id="updateSysDistrByAccountNumber" parameterType="com.dstz.org.core.model.SysDistr">
+		update zb_sys_distr set
+		<trim  suffixOverrides="," >
+			<if test="distrcode != null and distrcode != ''" >
+				distrcode =  #{distrcode},
+			</if>
+			<if test="distrname != null and distrname != ''" >
+				distrname =  #{distrname},
+			</if>
+			<if test="administrativeArea != null and administrativeArea != ''" >
+				administrativeArea =  #{administrativeArea},
+			</if>
+			<if test="province != null and province != ''" >
+				province =  #{province},
+			</if>
+			<if test="city != null and city != ''" >
+				city =  #{city},
+			</if>
+			<if test="accountShortName != null and accountShortName != ''" >
+				accountShortName =  #{accountShortName},
+			</if>
+			<if test="registrationAddress != null and registrationAddress != ''" >
+				registrationAddress =  #{registrationAddress},
+			</if>
+			<if test="legalPerson != null and legalPerson != ''" >
+				legalPerson =  #{legalPerson},
+			</if>
+			<if test="custAccountId != null and custAccountId != ''" >
+				custAccountId =  #{custAccountId},
+			</if>
+			<if test="brandCode != null and brandCode != ''" >
+				brandCode =  #{brandCode},
+			</if>
+			<if test="source != null and source != ''" >
+				source =  #{source},
+			</if>
+			<if test="distrstatus != null " >
+				distrstatus =  #{distrstatus},
+			</if>
+			<if test="brandName != null and brandName != ''" >
+				brandName =  #{brandName},
+			</if>
+			<if test="provinceName != null and provinceName != ''" >
+				provinceName =  #{provinceName},
+			</if>
+			<if test="cityName != null and cityName != ''" >
+				cityName =  #{cityName},
+			</if>
+			<if test="centerCode != null and centerCode != ''" >
+				centerCode =  #{centerCode},
+			</if>
+			<if test="centerName != null and centerName != ''" >
+				centerName =  #{centerName},
+			</if>
+			<if test="sqCode != null and sqCode != ''" >
+				sqCode =  #{sqCode},
+			</if>
+			<if test="sqName != null and sqName != ''" >
+				sqName =  #{sqName},
+			</if>
+			<if test="pqCode != null and pqCode != ''" >
+				pqCode =  #{pqCode},
+			</if>
+			<if test="pqName != null and pqName != ''" >
+				pqName =  #{pqName},
+			</if>
+			<if test="updateTime != null" >
+				updateTime =  #{updateTime},
+			</if>
+		</trim>
+		where distrid = #{distrid}
+	</update>
+	
+</mapper>

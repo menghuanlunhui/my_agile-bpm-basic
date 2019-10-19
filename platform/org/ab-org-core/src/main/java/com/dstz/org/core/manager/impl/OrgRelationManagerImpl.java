@@ -1,19 +1,10 @@
 package com.dstz.org.core.manager.impl;
 
-import java.util.Arrays;
-import java.util.List;
-
-import javax.annotation.Resource;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
-
+import cn.hutool.core.util.ArrayUtil;
 import com.alibaba.fastjson.JSON;
 import com.dstz.base.api.exception.BusinessMessage;
 import com.dstz.base.api.query.QueryFilter;
 import com.dstz.base.api.query.QueryOP;
-import com.dstz.base.api.response.impl.ResultMsg;
 import com.dstz.base.core.cache.ICache;
 import com.dstz.base.core.util.AppUtil;
 import com.dstz.base.core.util.StringUtil;
@@ -26,8 +17,14 @@ import com.dstz.org.core.dao.OrgRelationDao;
 import com.dstz.org.core.manager.OrgRelationManager;
 import com.dstz.org.core.model.OrgRelation;
 import com.github.pagehelper.Page;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
-import cn.hutool.core.util.ArrayUtil;
+import javax.annotation.Resource;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * 用户组织关系 Manager处理实现类
  * @author Jeff
@@ -35,10 +32,15 @@ import cn.hutool.core.util.ArrayUtil;
  * @time 2018-12-16 01:07:59
  */
 @Service("orgRelationManager")
-public class OrgRelationManagerImpl extends BaseManager<String, OrgRelation> implements OrgRelationManager{
+public class OrgRelationManagerImpl extends BaseManager<String, OrgRelation> implements OrgRelationManager {
 	protected  final Logger log = LoggerFactory.getLogger(this.getClass());
 	@Resource
-	OrgRelationDao orgRelationDao;
+    OrgRelationDao orgRelationDao;
+
+	@Override
+	public List<OrgRelation> getPostByUserIdAndGroupId(String userId, String groupId) {
+		return orgRelationDao.getPostByUserIdAndGroupId(userId, groupId);
+	}
 
 	@Override
 	public List<OrgRelation> getPostByUserId(String userId) {
@@ -73,7 +75,7 @@ public class OrgRelationManagerImpl extends BaseManager<String, OrgRelation> imp
 		OrgRelation relation = orgRelationDao.get(id);
 		if(relation == null || StringUtil.isEmpty(relation.getUserId())) return ;
 		
-		List<String> relationList = Arrays.asList(RelationTypeConstant.GROUP_USER.getKey(),RelationTypeConstant.POST_USER.getKey());
+		List<String> relationList = Arrays.asList(RelationTypeConstant.GROUP_USER.getKey(), RelationTypeConstant.POST_USER.getKey());
 		//查询出用户 与 岗位，组织的所有关系，置为 非主版本
 		List<OrgRelation>  userGroupRelations = orgRelationDao.getRelationsByParam(relationList, relation.getUserId(), null, null);
 		userGroupRelations.forEach(rel ->{
@@ -106,7 +108,7 @@ public class OrgRelationManagerImpl extends BaseManager<String, OrgRelation> imp
 	public void saveUserGroupRelation(String groupId, String[] roleIds, String[] userIds) {
 		for(String userId : userIds) {
 			if(StringUtil.isEmpty(userId))continue;
-			OrgRelation orgRelation = new OrgRelation(groupId,userId,null,RelationTypeConstant.GROUP_USER.getKey());
+			OrgRelation orgRelation = new OrgRelation(groupId,userId,null, RelationTypeConstant.GROUP_USER.getKey());
 			if(ArrayUtil.isNotEmpty(roleIds)) {
 				for(String roleId : roleIds) {
 					orgRelation.setRoleId(roleId);
@@ -140,7 +142,7 @@ public class OrgRelationManagerImpl extends BaseManager<String, OrgRelation> imp
 	public int saveRoleUsers(String roleId, String[] userIds) {
 		int i = 0;
 		for(String userId : userIds) {
-			OrgRelation orgRelation = new OrgRelation(null,userId,roleId,RelationTypeConstant.USER_ROLE.getKey());
+			OrgRelation orgRelation = new OrgRelation(null,userId,roleId, RelationTypeConstant.USER_ROLE.getKey());
 			if(checkRelationIsExist(orgRelation)) {
 				log.warn("关系重复添加，已跳过  {}",JSON.toJSONString(orgRelation));
 				continue;

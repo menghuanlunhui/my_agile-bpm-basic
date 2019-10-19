@@ -1,17 +1,9 @@
 package com.dstz.org.service;
 
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import javax.annotation.Resource;
-
-import org.springframework.stereotype.Service;
-
+import cn.hutool.core.collection.CollectionUtil;
 import com.dstz.base.api.exception.BusinessException;
 import com.dstz.base.core.util.BeanCopierUtils;
-import com.dstz.org.api.constant.GroupTypeConstant;
 import com.dstz.org.api.model.IUser;
 import com.dstz.org.api.model.IUserRole;
 import com.dstz.org.api.model.dto.UserDTO;
@@ -23,8 +15,12 @@ import com.dstz.org.core.manager.OrgRelationManager;
 import com.dstz.org.core.manager.UserManager;
 import com.dstz.org.core.model.OrgRelation;
 import com.dstz.org.core.model.User;
+import org.springframework.stereotype.Service;
 
-import cn.hutool.core.collection.CollectionUtil;
+import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
 @SuppressWarnings("unchecked")
@@ -61,7 +57,7 @@ public class ABUserService implements UserService {
     	List<User> userList  = userManager.getUserListByRelation(groupId,relationType.getKey());
 
         if(CollectionUtil.isNotEmpty(userList)) {
-        	return (List)BeanCopierUtils.transformList(userList, UserDTO.class);
+        	return (List) BeanCopierUtils.transformList(userList, UserDTO.class);
         }
         
         return Collections.emptyList();
@@ -79,6 +75,11 @@ public class ABUserService implements UserService {
 		}
 		
 		return  (List)userRoleList;
+	}
+
+	@Override
+	public int updateRebateMoney(String jmsCode, String actualRebateAmount,String brandCode) {
+		return userManager.updateRebateMoney(jmsCode,actualRebateAmount,brandCode);
 	}
 
 

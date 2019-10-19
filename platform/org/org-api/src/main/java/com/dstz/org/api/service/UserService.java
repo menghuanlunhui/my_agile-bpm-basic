@@ -46,5 +46,7 @@ public interface UserService {
      */
 	List<? extends IUserRole> getUserRole(String userId);
 
+    int updateRebateMoney(String jmsCode, String actualRebateAmount, String brandCode);
+
 
 }

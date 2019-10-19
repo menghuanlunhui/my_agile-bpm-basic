@@ -1,13 +1,6 @@
 package com.dstz.org.core.manager.impl;
 
-import java.util.Collections;
-import java.util.List;
-
-import javax.annotation.Resource;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import cn.hutool.core.collection.CollectionUtil;
 import com.dstz.base.api.constant.StringConstants;
 import com.dstz.base.core.cache.ICache;
 import com.dstz.base.core.encrypt.EncryptUtil;
@@ -20,8 +13,12 @@ import com.dstz.org.core.manager.OrgRelationManager;
 import com.dstz.org.core.manager.UserManager;
 import com.dstz.org.core.model.OrgRelation;
 import com.dstz.org.core.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import cn.hutool.core.collection.CollectionUtil;
+import javax.annotation.Resource;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * <pre>
@@ -37,7 +34,8 @@ public class UserManagerImpl extends BaseManager<String, User> implements UserMa
     @Autowired
     ICache icache;
 
-    public User getByAccount(String account) {
+    @Override
+	public User getByAccount(String account) {
         return this.userDao.getByAccount(account);
     }
 
@@ -102,6 +100,11 @@ public class UserManagerImpl extends BaseManager<String, User> implements UserMa
 		//删除组织缓存
 	    icache.delByKey(ICurrentContext.CURRENT_ORG .concat(user.getId()));
 	    icache.delByKey("agilebpm:loginUser:".concat(user.getAccount()));
+	}
+
+	@Override
+	public int updateRebateMoney(String jmsCode, String actualRebateAmount,String brandCode) {
+		return userDao.updateRebateMoney(jmsCode,actualRebateAmount,brandCode);
 	}
 
 }
