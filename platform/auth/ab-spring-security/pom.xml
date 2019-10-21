@@ -38,5 +38,9 @@
             <groupId>com.dstz.agilebpm</groupId>
             <artifactId>sys-api</artifactId>
         </dependency>
-	</dependencies>
+        <dependency>
+            <groupId>com.dstz.agilebpm</groupId>
+            <artifactId>ab-org-core</artifactId>
+        </dependency>
+    </dependencies>
 </project>
