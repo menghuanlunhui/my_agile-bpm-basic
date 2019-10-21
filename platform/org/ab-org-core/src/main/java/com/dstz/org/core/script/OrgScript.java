@@ -176,6 +176,9 @@ public class OrgScript implements IScript {
 			//汇总省区返利金额
 			sqbnljflje=userService.getSqCurrentYearRebate(sqCode);
 		}
+		if(sqbnljflje==null){
+			sqbnljflje="0";
+		}
 		return sqbnljflje;
 	}
 
