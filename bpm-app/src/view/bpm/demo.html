@@ -1,0 +1,234 @@
+<div>
+    <div>
+        <div>
+            <div>
+                <script>
+	<!--脚本将会混入表单自定义表单控件-->
+	window.custFormComponentMixin ={
+			data: function () {
+		    	return {"test":"helloWorld"};
+		  	},
+			created:function(){
+				console.log("混入对象的钩子被调用");
+			}
+	}</script>
+                <div class="weui-cells weui-cells_form">
+                    <div class="weui-cell" v-ab-permission:show="permission.applyOrderInfo.applyOrder.applyNo">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">订单编号</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input type="text" class=" weui-input" v-model="data.applyOrderInfo.applyNo" v-ab-permission="permission.applyOrderInfo.applyOrder.applyNo" desc="订单编号" v-ab-validate="{&quot;required&quot;:true}"/>
+                        </div>
+                    </div>
+                    <div class="weui-cell" v-ab-permission:show="permission.applyOrderInfo.applyOrder.qdjl">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">渠道经理</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <a href="javascript:void(0)" class=" btn btn-primary fa-upload" ab-upload="" v-ab-permission:edit="permission.applyOrderInfo.applyOrder.qdjl"></a>
+                        </div>
+                    </div>
+                    <div class="weui-cell" v-ab-permission:show="permission.applyOrderInfo.applyOrder.wllx">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">物料类型</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input type="text" class=" weui-input" v-model="data.applyOrderInfo.wllx" v-ab-permission="permission.applyOrderInfo.applyOrder.wllx" desc="物料类型" v-ab-validate="{}"/>
+                        </div>
+                    </div>
+                    <div class="weui-cell" v-ab-permission:show="permission.applyOrderInfo.applyOrder.wlmz">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">物料名字</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input type="text" class=" weui-input" v-model="data.applyOrderInfo.wlmz" v-ab-permission="permission.applyOrderInfo.applyOrder.wlmz" desc="物料名字" v-ab-validate="{}"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="applyOrderInfo-customerRel" v-ab-permission:show="tablePermission.applyOrderInfo.customerRel">
+                <div class="weui-cells__title">
+                    <span class="title">客户关系</span><a href="javascript:;" v-sub-add="[data.applyOrderInfo.customerRelList,initData.applyOrderInfo.customerRel]" class="fa fa-plus weui-btn weui-btn_mini weui-btn_primary" v-ab-permission:edit="tablePermission.applyOrderInfo.customerRel"></a>
+                </div>
+                <div class="weui-cells weui-cells_form" v-for="(customerRel,index) in data.applyOrderInfo.customerRelList">
+                    <div class="weui-cells__title">
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 	
+		 	<a href="javascript:;" v-sub-del="[data.applyOrderInfo.customerRelList,index]" class="fa fa-trash weui-btn weui-btn_mini weui-btn_warn pull-right" v-ab-permission:edit="tablePermission.applyOrderInfo.customerRel"></a>
+                    </div>
+                    <div class="weui-cell" v-ab-permission:show="permission.applyOrderInfo.customerRel.applyNo">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">订单编号</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input type="text" class=" weui-input" v-model="customerRel.applyNo" v-ab-permission="permission.applyOrderInfo.customerRel.applyNo" desc="订单编号" v-ab-validate="{&quot;required&quot;:true}"/>
+                        </div>
+	&nbsp; &nbsp;
+                    </div>
+                    <div class="weui-cell" v-ab-permission:show="permission.applyOrderInfo.customerRel.relType">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">关系类型</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <select class=" weui-input" v-model="customerRel.relType" v-ab-permission="permission.applyOrderInfo.customerRel.relType" desc="关系类型" v-ab-validate="{&quot;required&quot;:true}"><option value="">
+                                请选择
+                            </option>
+                            <option value="seller">
+                                卖家
+                            </option>
+                            <option value="buyer">
+                                买家
+                            </option></select>
+                        </div>
+	&nbsp; &nbsp;
+                    </div>
+                    <div class="weui-cell" v-ab-permission:show="permission.applyOrderInfo.customerRel.custNo">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">客户编号</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input type="text" class=" weui-input" v-model="customerRel.custNo" v-ab-permission="permission.applyOrderInfo.customerRel.custNo" desc="客户编号" v-ab-validate="{&quot;required&quot;:true}"/>
+                        </div>
+	&nbsp; &nbsp;
+                    </div>
+                    <div id="applyOrderInfo-customer">
+                        <div class="weui-cells__title">
+                            客户信息
+                        </div>
+                        <div class="weui-cells weui-cells_form">
+                            <div class="weui-cell" v-ab-permission:show="permission.applyOrderInfo.customer.custNo">
+                                <div class="weui-cell__hd">
+                                    <label class="weui-label">编号</label>
+                                </div>
+                                <div class="weui-cell__bd">
+                                    <input type="text" class=" weui-input" v-model="customerRel.customer.custNo" v-ab-permission="permission.applyOrderInfo.customer.custNo" desc="编号" v-ab-validate="{&quot;required&quot;:true}"/>
+                                </div>
+                            </div>
+                            <div class="weui-cell" v-ab-permission:show="permission.applyOrderInfo.customer.name">
+                                <div class="weui-cell__hd">
+                                    <label class="weui-label">姓名</label>
+                                </div>
+                                <div class="weui-cell__bd">
+                                    <input type="text" class=" weui-input" v-model="customerRel.customer.name" v-ab-permission="permission.applyOrderInfo.customer.name" desc="姓名" v-ab-validate="{}"/>
+                                </div>
+                            </div>
+                            <div class="weui-cell" v-ab-permission:show="permission.applyOrderInfo.customer.age">
+                                <div class="weui-cell__hd">
+                                    <label class="weui-label">年龄</label>
+                                </div>
+                                <div class="weui-cell__bd">
+                                    <input type="text" class=" weui-input" v-model="customerRel.customer.age" v-ab-permission="permission.applyOrderInfo.customer.age" desc="年龄" v-ab-validate="{}"/>
+                                </div>
+                            </div>
+                            <div class="weui-cell" v-ab-permission:show="permission.applyOrderInfo.customer.jycd">
+                                <div class="weui-cell__hd">
+                                    <label class="weui-label">教育程度</label>
+                                </div>
+                                <div class="weui-cell__bd">
+                                    <input type="text" class=" weui-input" v-model="customerRel.customer.jycd" v-ab-permission="permission.applyOrderInfo.customer.jycd" desc="教育程度" v-ab-validate="{}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="applyOrderInfo-orderBatch" v-ab-permission:show="tablePermission.applyOrderInfo.orderBatch">
+            <div class="weui-cells__title">
+                <span class="title">订单批次</span><a href="javascript:;" v-sub-add="[data.applyOrderInfo.orderBatchList,initData.applyOrderInfo.orderBatch]" class="fa fa-plus weui-btn weui-btn_mini weui-btn_primary" v-ab-permission:edit="tablePermission.applyOrderInfo.orderBatch"></a>
+            </div>
+            <div class="weui-cells weui-cells_form" v-for="(orderBatch,index) in data.applyOrderInfo.orderBatchList">
+                <div class="weui-cells__title">
+                    <div class="pull-left">
+                        <a href="#" v-on:click="showSubTable(orderBatch,&#39;item&#39;)" class="fa fa-detail weui-btn weui-btn_mini weui-btn_primary" v-ab-permission:show="tablePermission.applyOrderInfo.item">物料</a>
+                    </div> 	<a href="javascript:;" v-sub-del="[data.applyOrderInfo.orderBatchList,index]" class="fa fa-trash weui-btn weui-btn_mini weui-btn_warn pull-right" v-ab-permission:edit="tablePermission.applyOrderInfo.orderBatch"></a>
+                </div>
+                <div class="weui-cell" v-ab-permission:show="permission.applyOrderInfo.orderBatch.no">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">流水号</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input type="text" class=" weui-input" v-model="orderBatch.no" v-ab-permission="permission.applyOrderInfo.orderBatch.no" desc="流水号" v-ab-validate="{}"/>
+                    </div>
+	&nbsp; &nbsp;
+                </div>
+                <div class="weui-cell" v-ab-permission:show="permission.applyOrderInfo.orderBatch.createTIme">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">创建时间</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <datetime v-model="orderBatch.createTIme" desc="创建时间" v-ab-validate="{}" v-ab-permission="permission.applyOrderInfo.orderBatch.createTIme" format="YYYY-MM-DD HH:mm"></datetime>
+                    </div>
+	&nbsp; &nbsp;
+                </div>
+                <div class="weui-cell" v-ab-permission:show="permission.applyOrderInfo.orderBatch.amount">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">总金额</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input type="text" class=" weui-input" v-model="orderBatch.amount" v-ab-permission="permission.applyOrderInfo.orderBatch.amount" desc="总金额" v-ab-validate="{}"/>
+                    </div>
+	&nbsp; &nbsp;
+                </div>
+                <div class="weui-cell" v-ab-permission:show="permission.applyOrderInfo.orderBatch.remark">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">备注</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input type="text" class=" weui-input" v-model="orderBatch.remark" v-ab-permission="permission.applyOrderInfo.orderBatch.remark" desc="备注" v-ab-validate="{}"/>
+                    </div>
+	&nbsp; &nbsp;
+                </div>
+                <div class="weui-cell" v-ab-permission:show="permission.applyOrderInfo.orderBatch.applyNo">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">订单编号</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input type="text" class=" weui-input" v-model="orderBatch.applyNo" v-ab-permission="permission.applyOrderInfo.orderBatch.applyNo" desc="订单编号" v-ab-validate="{&quot;required&quot;:true}"/>
+                    </div>
+	&nbsp; &nbsp;
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="applyOrderInfo-item" v-transfer-dom="" v-if="subTempData.itemList" v-ab-permission:show="tablePermission.applyOrderInfo.item">
+        <popup v-model="subTableDialog.item" position="bottom" height="80%">
+            <div class="weui-cells__title">
+                <span class="title">物料</span><a href="javascript:;" v-sub-add="[subTempData.itemList,initData.applyOrderInfo.item]" class="fa fa-plus weui-btn weui-btn_mini weui-btn_primary" v-ab-permission:edit="tablePermission.applyOrderInfo.item"></a>
+            </div>
+            <div class="weui-cells weui-cells_form" v-for="(item,index) in subTempData.itemList">
+                <div class="weui-cells__title">
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 	
+		 	<a href="javascript:;" v-sub-del="[subTempData.itemList,index]" class="fa fa-trash weui-btn weui-btn_mini weui-btn_warn pull-right" v-ab-permission:edit="tablePermission.applyOrderInfo.item"></a>
+                </div>
+                <div class="weui-cell" v-ab-permission:show="permission.applyOrderInfo.item.cpmz">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">产品名字</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input type="text" class=" weui-input" v-model="item.cpmz" v-ab-permission="permission.applyOrderInfo.item.cpmz" desc="产品名字" v-ab-validate="{}"/>
+                    </div>
+	&nbsp; &nbsp;
+                </div>
+                <div class="weui-cell" v-ab-permission:show="permission.applyOrderInfo.item.zl">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">种类</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input type="text" class=" weui-input" v-model="item.zl" v-ab-permission="permission.applyOrderInfo.item.zl" desc="种类" v-ab-validate="{}"/>
+                    </div>
+	&nbsp; &nbsp;
+                </div>
+                <div class="weui-cell" v-ab-permission:show="permission.applyOrderInfo.item.dj">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">单价</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input type="text" class=" weui-input" v-model="item.dj" v-ab-permission="permission.applyOrderInfo.item.dj" desc="单价" v-ab-validate="{}"/>
+                    </div>
+	&nbsp; &nbsp;
+                </div>
+            </div>
+        </popup>
+    </div>
+</div>
