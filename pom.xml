@@ -64,7 +64,7 @@
         <logback.version>1.2.3</logback.version>
         <jackson.version>2.9.8</jackson.version>
         <mysql.version>5.1.41</mysql.version>
-        <mybatis.version>3.3.0</mybatis.version>
+        <mybatis.version>3.5.6</mybatis.version>
         <pagehelper.version>5.0.0</pagehelper.version>
         <mybatis.spring.version>1.2.4</mybatis.spring.version>
         <alibaba.druid.version>1.0.25</alibaba.druid.version>
