@@ -54,7 +54,7 @@
         <servlet.version>2.5</servlet.version>
         <fastjson.version>1.2.51</fastjson.version>
         <commons-lang3.version>3.3.2</commons-lang3.version>
-        <commons-io.version>2.4</commons-io.version>
+        <commons-io.version>2.7</commons-io.version>
         <commons-codec.version>20041127.091804</commons-codec.version>
         <commons-collections.version>3.2</commons-collections.version>
         <commons-httpclient.version>3.1</commons-httpclient.version>
